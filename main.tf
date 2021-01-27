@@ -19,6 +19,7 @@ locals {
     "github_oauth_token" = { "value" = var.github_oauth_token, "sensitive" = true  }
   }
   infra_vars = {}
+  service_vars = {}
 }
 resource "tfe_workspace" "infrastructure" {
   name = "infrastructure"
@@ -32,6 +33,14 @@ resource "tfe_workspace" "service" {
 
 resource "tfe_variable" "infra_vars" {
   for_each = join( local.tfe_vars, local.infra_vars)
+  category = "terraform"
+  key = each.key
+  value = each.value
+  workspace_id = tfe_workspace.infrastructure.id
+}
+
+resource "tfe_variable" "service_vars" {
+  for_each = join( local.tfe_vars, local.service_vars)
   category = "terraform"
   key = each.key
   value = each.value
