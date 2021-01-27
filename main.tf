@@ -38,7 +38,8 @@ resource "tfe_variable" "infra_tfe_vars" {
   for_each =local.tfe_vars
   category = "terraform"
   key = each.key
-  value = each.value
+  value = lookup(each.value,"value","")
+  sensitive = lookup(each.value,"sensitive",false)
   workspace_id = tfe_workspace.infrastructure.id
 }
 
@@ -46,6 +47,7 @@ resource "tfe_variable" "service_tfe_vars" {
   for_each = local.tfe_vars
   category = "terraform"
   key = each.key
-  value = each.value
+  value = lookup(each.value,"value","")
+  sensitive = lookup(each.value,"sensitive",false)
   workspace_id = tfe_workspace.service.id
 }
