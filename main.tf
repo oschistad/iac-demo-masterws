@@ -15,9 +15,19 @@ locals {
   infra_vars = {}
   service_vars = {}
 }
+variable "repo_identifier_infra" {
+  default = "oschistad/iac-demo-infrastructure"
+}
+variable "repo_identifier_service" {
+  default = "oschistad/iac-demo-service"
+}
 resource "tfe_workspace" "infrastructure" {
   name = "infrastructure"
   organization = var.tfe_orgname
+  vcs_repo {
+    identifier = var.repo_identifier_infra
+    oauth_token_id = var.github_oauth_token
+  }
 }
 
 resource "tfe_workspace" "service" {
