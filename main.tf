@@ -35,7 +35,7 @@ resource "tfe_workspace" "service" {
 }
 
 resource "tfe_variable" "infra_tfe_vars" {
-  for_each =local.infra_vars
+  for_each =local.tfe_vars
   category = "terraform"
   key = each.key
   value = each.value
@@ -43,9 +43,9 @@ resource "tfe_variable" "infra_tfe_vars" {
 }
 
 resource "tfe_variable" "service_tfe_vars" {
-  for_each = local.service_vars
+  for_each = local.tfe_vars
   category = "terraform"
   key = each.key
   value = each.value
-  workspace_id = tfe_workspace.infrastructure.id
+  workspace_id = tfe_workspace.service.id
 }
