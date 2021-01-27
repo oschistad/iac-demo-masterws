@@ -32,7 +32,7 @@ resource "tfe_workspace" "service" {
 }
 
 resource "tfe_variable" "infra_vars" {
-  for_each = concat( local.tfe_vars, local.infra_vars)
+  for_each = merge( local.tfe_vars, local.infra_vars)
   category = "terraform"
   key = each.key
   value = each.value
