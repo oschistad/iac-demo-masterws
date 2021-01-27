@@ -9,8 +9,7 @@ locals {
     "client_id" = { "value" = var.client_id, "sensitive" = true  }
     "client_secret" = { "value" = var.client_secret, "sensitive" = true  }
     "tenant_id" = { "value" = var.tenant_id, "sensitive" = true  }
-    "tfe_token" = { "value" = var.tfe_token, "sensitive" = true  }
-    "github_oauth_token" = { "value" = var.github_oauth_token, "sensitive" = true  }
+    "github_oauth_token_id" = { "value" = var.github_oauth_token_id, "sensitive" = false  }
   }
   infra_vars = {}
   service_vars = {}
@@ -26,7 +25,7 @@ resource "tfe_workspace" "infrastructure" {
   organization = var.tfe_orgname
   vcs_repo {
     identifier = var.repo_identifier_infra
-    oauth_token_id = var.github_oauth_token
+    oauth_token_id = var.github_oauth_token_id
   }
 }
 
