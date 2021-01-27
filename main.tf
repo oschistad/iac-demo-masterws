@@ -31,16 +31,16 @@ resource "tfe_workspace" "service" {
   organization = var.tfe_orgname
 }
 
-resource "tfe_variable" "infra_vars" {
-  for_each = merge( local.tfe_vars, local.infra_vars)
+resource "tfe_variable" "infra_tfe_vars" {
+  for_each =local.infra_vars
   category = "terraform"
   key = each.key
   value = each.value
   workspace_id = tfe_workspace.infrastructure.id
 }
 
-resource "tfe_variable" "service_vars" {
-  for_each = merge( local.tfe_vars, local.service_vars)
+resource "tfe_variable" "service_tfe_vars" {
+  for_each = local.service_vars
   category = "terraform"
   key = each.key
   value = each.value
