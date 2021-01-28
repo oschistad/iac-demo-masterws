@@ -6,4 +6,4 @@ This repository will create one or more daughter workspaces in Terraform Cloud, 
 
 The purpose of this repo is to maintain tne Organization config and implement a secure process by which the tokens necessary to integrate with GitHub and Azure are propagated without the need to handle them manually.
 
-This workspace is expected to be managed by the [iac-demo](github.com/oschistad/iac-demo-setup) repository
+This workspace is expected to be managed by the [iac-demo](https://github.com/oschistad/iac-demo-setup) repository
